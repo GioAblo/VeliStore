@@ -1,0 +1,171 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 0 70% 42%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 84% 5%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 10% 3%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 10% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 0 70% 42%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 18%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 213 27% 84%;
+  }
+}
+
+/* body {
+  font-family: f
+} */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: white !important;
+  }
+  
+  .page-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-tattoo-red to-orange-600 bg-clip-text text-transparent;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.scrollbarhide::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .NavForProfilePage {
+      display: none;
+    }
+}
+
+.SideBarLinks::after {
+  content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    border-bottom: 1px solid rgba(220, 221, 224, 0.4);
+}
+
+
+.InfoTop::after{
+  content: "";
+    position: absolute;
+    bottom: -1.5px;
+    left: 0px;
+    height: 2px;
+    background-color: rgb(140, 164, 101);
+    
+}
+
+
+.sortselect {
+  outline: none;
+  
+  background-color: transparent;
+  
+}
+
+.sortselect::-ms-expand {
+  display: none;
+}
+
+.cartcompcont::-webkit-scrollbar {
+  width: 7px;
+  background: white;
+}
+
+.cartcompcont::-webkit-scrollbar-thumb {
+  background: rgb(194, 194, 194);
+  
+}
+
+.signupscroll::-webkit-scrollbar-thumb {
+  background: rgb(203, 203, 203);
+ 
+}
+
+.signupscroll::-webkit-scrollbar {
+  width: 7px;
+}
