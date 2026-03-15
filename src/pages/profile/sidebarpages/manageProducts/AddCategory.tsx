@@ -15,7 +15,7 @@ const AddCategory = () => {
     
 
 
-      const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
           const { name, value } = event.target
   
           console.log(name, value);
@@ -25,20 +25,17 @@ const AddCategory = () => {
               ...prev,
               [name]: value,
           }));
-      };    
+    };    
   
-      console.log(formData);
+   
       
       
   
-      const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
           e.preventDefault()
   
           try {
               const addCategorySuccessfully = await addCategory(formData, token)
-              
-              
-              
               
               if (addCategorySuccessfully) {
                  
@@ -58,7 +55,7 @@ const AddCategory = () => {
           } catch (err) {
               console.log("Error: ", err)
           }
-      }        
+    }        
 
 
 

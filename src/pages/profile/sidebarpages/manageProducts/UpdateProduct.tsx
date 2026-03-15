@@ -75,6 +75,12 @@ const UpdateProduct = () => {
   };
 
 
+
+
+
+  
+
+
   const deleteProduct = async(ids: string) => {
     try {
       const response = await deleteProductById([ids], token)

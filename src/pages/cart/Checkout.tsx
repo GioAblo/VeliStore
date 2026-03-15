@@ -22,7 +22,7 @@ const Checkout = ({contactInfo, productData, delivryTime, address, dataPrice}) =
     const purchasesHistory = async () => {
       const res = await getAllPurchases(token)
 
-      console.log(res);
+     
       
       return res
     }

@@ -2,25 +2,30 @@ import { getAllProducts } from "@/services/api/product"
 import { useEffect, useState } from "react"
 import ProductInterface from "../services/api/product"
 import { getAllCategories } from "@/services/api/category"
-import { postCart } from "@/services/api/cart"
+import { CartInterface, getCartData, postCart } from "@/services/api/cart"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/store"
 import useAddToCart from "@/components/cartcomponent/useAddToCart"
 import AddWishList from "@/components/AddWishList"
 import { setProductCount } from "@/store/countProduct"
 import { Link, useLocation } from "react-router-dom"
+import { getCurrentUser } from "@/services/api/user"
 
 
 
 const Home = () => {
     const countOfProduct = useSelector((state: RootState) => state.product.count)
+    const [countProduct, setCountProduct] = useState(countOfProduct)
+
+    
+    
     const [products, setProducts] = useState<ProductInterface[]>([])
     const [categories, setCategories] = useState([])
-    const [countProduct, setCountProduct] = useState(countOfProduct)
     const [sale, setSale] = useState<ProductInterface[]>([])
     const [clothing, setClothing] = useState<ProductInterface[]>([])
     const [electroinics, setElectronics] = useState<ProductInterface[]>([])
     const [books, setBooks] = useState<ProductInterface[]>([])
+
 
 
     
@@ -28,6 +33,23 @@ const Home = () => {
 
     const dispatch = useDispatch()
 
+
+    useEffect(() => {
+        dispatch(setProductCount({count: countProduct }))
+    },[addToCart, countProduct, dispatch ])
+
+
+
+    
+    const addToCartManually = (id: string) => {
+    
+            setCountProduct((prev) => prev + 1)
+    
+            addToCart(id)
+    }
+
+
+    /// categirs
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -43,10 +65,9 @@ const Home = () => {
     }, [])    
 
 
-    useEffect(() => {
-        dispatch(setProductCount({count: countProduct}))
-    },[addToCart, dispatch, countProduct])
 
+
+    //// fet Products
     useEffect(() => {
         const fetchProducts = async () => {
         try {
@@ -66,17 +87,9 @@ const Home = () => {
     }, [])
     
 
-    const addToCartManually = (id: string) => {
-
-        setCountProduct((prev) => prev + 1)
-
-        addToCart(id)
-    }
-
     
 
 
-    
   
 
     return (

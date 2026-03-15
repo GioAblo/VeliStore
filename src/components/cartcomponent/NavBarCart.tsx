@@ -94,7 +94,6 @@ const NavBarCart = ({setCartPopUp}) => {
     
     
 
-    console.log(dataPrice);
     
 
   return (

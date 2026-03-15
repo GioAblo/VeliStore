@@ -8,7 +8,7 @@ import { logInSuccess } from '@/store/slices/authSlice'
 import Swal from "sweetalert2"
 
 const SignIn = ({setIsSign}) => {
-    const [formData, setFormData] = useState<signinFormInterface>({ email: "abloablo3030@gmail.com", password: "barcelona2015" })
+    const [formData, setFormData] = useState<signinFormInterface>({ email: "", password: "" })
     //email: "abloablo3030@gmail.com", password: "barcelona2015"
     const [error, setError] = useState<string>("")
     const dispatch = useDispatch()
@@ -35,8 +35,7 @@ const SignIn = ({setIsSign}) => {
             }, 1500)
 
             Swal.fire({
-                title: "გილოცავთ!",
-                text: "თქვენ წარმატებით გაიარეთ ავტორიზაცია",
+                title: "You are loged in!",
                 icon: "success",
                 showConfirmButton: false,
                 timer: 1500,

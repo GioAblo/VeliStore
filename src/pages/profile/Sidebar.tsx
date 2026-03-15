@@ -1,7 +1,19 @@
+import LogOutComp from "@/components/LogOutComp"
+import { logOut } from "@/store/slices/authSlice"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 
+interface SidebarProps {
+  onLogoutClick: () => void
+}
 
-const Sidebar = () => {
+
+const Sidebar = ({ onLogoutClick }: SidebarProps) => {
+
+    
+
+
   return (
     <nav className="flex flex-col gap-2 xl:gap-3 text-[12px] md:text-[14px] md:w-[224px] xl:w-[252px] list-none">
         <li className="">
@@ -60,15 +72,16 @@ const Sidebar = () => {
         </li>    
 
         <li>
-          <div className={`SideBarLinks relative  rounded-2xl items-center  flex h-[54px] xl:h-[60px] gap-2 md:after:hidden  md:gap-3 font-medium hover:bg-gray-200"`}>
+          <button onClick={onLogoutClick}  className={`SideBarLinks relative  rounded-2xl items-center  flex h-[54px] xl:h-[60px] gap-2 md:after:hidden  md:gap-3 font-medium hover:bg-gray-200"`}>
             <div className="ml-4 xl:ml-6">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 16.3613H3.16667C2.72464 16.3613 2.30072 16.1857 1.98816 15.8732C1.67559 15.5606 1.5 15.1367 1.5 14.6947V3.02799C1.5 2.58597 1.67559 2.16204 1.98816 1.84948C2.30072 1.53692 2.72464 1.36133 3.16667 1.36133H6.5" stroke="currentColor" strokeWidth="1.71591" strokeLinecap="round" strokeLinejoin="round"></path><path d="M12.334 13.0296L16.5007 8.86296L12.334 4.69629" stroke="currentColor" strokeWidth="1.71591" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5 8.8623H6.5" stroke="currentColor" strokeWidth="1.71591" strokeLinecap="round" strokeLinejoin="round"></path></svg>
             </div>
             <span>Log out</span>
-          </div>
-                    <div className="hidden md:flex w-full  items-center justify-center">
+          </button>
+          <div className="hidden md:flex w-full  items-center justify-center">
             <span className="h-[0.5px] w-[87%] bg-slate-200"></span>
           </div>
+          
         </li>
     </nav>
   )

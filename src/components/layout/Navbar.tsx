@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { CircleUser, Laptop } from 'lucide-react'
-import { Button } from '../ui/button'
+import { Link, useLocation } from 'react-router-dom'
 import { RootState } from '@/store'
 import { useSelector } from 'react-redux'
 import { useWindowScroll } from "@uidotdev/usehooks";
@@ -9,6 +7,8 @@ import SignIn from '@/pages/SignIn'
 import SignUp from '@/pages/SignUp'
 import NavBarCart from '../cartcomponent/NavBarCart'
 import MyVelicomp from '../MyVelicomp'
+import { CartInterface, getCartData } from '@/services/api/cart'
+import LogOutComp from '../LogOutComp'
 
 
 const Navbar: React.FC = () => {
@@ -17,31 +17,79 @@ const Navbar: React.FC = () => {
         const [pathName, setPathName] = useState("")
         const path = location.pathname
         const [{ x, y }, scrollTo] = useWindowScroll();
-          const user = useSelector((state: RootState) => state.auth.user)
-          const token = useSelector((state: RootState) => state.auth.token)
-          const countOfProduct = useSelector((state: RootState) => state.product.count)
+        const user = useSelector((state: RootState) => state.auth.user)
+        const token = useSelector((state: RootState) => state.auth.token)
+        const [cartData, setCartData] = useState<CartInterface[]>([])
+        const [initilaCount, setIniCount] = useState(Number)
+         
         const [signPopUp, setSignPopUp] = useState(false)
         const [isSign, setIsSign] = useState<boolean>(false)
         const [cartPopUp, setCartPopUp] = useState<boolean>(false)
         const [veliPopUp, setVeliPopUp] = useState<boolean>(false)
+        const productCount = useSelector((state: RootState) => state.product.count)
+        
+
+
+        const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+
+         
+
+
+        
+    const CalculateCount = () => {
+          useEffect(() => {
+              
+              const fetchCartData = async() => {
+                 
+      
+                  if (!token) {
+                      console.error("No token found");
+                      return;
+                  }   
+      
+                  try {
+                      const res = await getCartData(token)
+      
+                      setCartData(res)
+                  } catch (error) {
+                      console.log(error);
+                  }
+              }
+      
+              fetchCartData()
+          },[])
+      
+          useEffect(() => {
+              const count = cartData.reduce((total, product) => total + product.count, 0);
+
+              setIniCount(count)
+            
+              
+          }, [cartData]);
+
+    
+    }
+    CalculateCount()
         
         
+
+
        
         useEffect(() => {
-        if (!path) return
-    
-        const firstSegment = path.split("/")[1] 
-        console.log(firstSegment);
+            if (!path) return
         
-    
-        if (firstSegment === "category") {
-            setPathName("category")
-        } else {
-            setPathName(path)
-        }
+            const firstSegment = path.split("/")[1] 
+            
+            
+        
+            if (firstSegment === "category") {
+                setPathName("category")
+            } else {
+                setPathName(path)
+            }
         }, [path])    
 
-        useEffect(() => {
+    useEffect(() => {
             if (signPopUp || cartPopUp || veliPopUp) {
                 document.body.style.overflow = "hidden"
             } else {
@@ -53,7 +101,7 @@ const Navbar: React.FC = () => {
             return () => {
                 document.body.style.overflow = ""
             }
-        }, [signPopUp, cartPopUp, veliPopUp])
+    }, [signPopUp, cartPopUp, veliPopUp])
 
        
 
@@ -67,7 +115,9 @@ const Navbar: React.FC = () => {
         setCartPopUp(false)
     }
                 
-        
+
+    
+    
 
 
     return (
@@ -125,17 +175,17 @@ const Navbar: React.FC = () => {
                     <button onClick={() => cartFunc()} className='flex relative  items-center gap-3'>
                       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.95153 11.6052C4.50443 11.6052 4.95741 12.0679 4.95741 12.6394C4.95741 13.204 4.50443 13.6667 3.95153 13.6667C3.39196 13.6667 2.93898 13.204 2.93898 12.6394C2.93898 12.0679 3.39196 11.6052 3.95153 11.6052ZM11.4457 11.6052C11.9986 11.6052 12.4516 12.0679 12.4516 12.6394C12.4516 13.204 11.9986 13.6667 11.4457 13.6667C10.8861 13.6667 10.4331 13.204 10.4331 12.6394C10.4331 12.0679 10.8861 11.6052 11.4457 11.6052ZM0.852802 0.333423L0.920689 0.339169L2.50945 0.583411C2.73594 0.624912 2.90248 0.814726 2.92246 1.04604L3.04903 2.57C3.06901 2.78839 3.24221 2.95167 3.45538 2.95167H12.4517C12.8581 2.95167 13.1245 3.09454 13.391 3.4075C13.6574 3.72046 13.7041 4.16948 13.6441 4.577L13.0113 9.04003C12.8914 9.89794 12.1719 10.53 11.3259 10.53H4.05824C3.17227 10.53 2.4395 9.83671 2.36623 8.93866L1.75337 1.52228L0.74749 1.34539C0.481031 1.29777 0.29451 1.03243 0.34114 0.760299C0.387771 0.48204 0.647568 0.297668 0.920689 0.339169L0.852802 0.333423ZM10.2601 5.46825H8.41485C8.13507 5.46825 7.91524 5.69276 7.91524 5.9785C7.91524 6.25744 8.13507 6.48876 8.41485 6.48876H10.2601C10.5399 6.48876 10.7597 6.25744 10.7597 5.9785C10.7597 5.69276 10.5399 5.46825 10.2601 5.46825Z" fill="currentColor"></path></svg>  
                       <span className='text-[13px] font-bold'>Cart</span>
-                      <div className='text-white flex items-center text-center text-[8px] justify-center bg-[#FF8469] font-bold w-[12px] h-[12px] top-[-3px] left-[9px]  rounded-full absolute '>{countOfProduct}</div>
+                      <div className='text-white flex items-center text-center text-[8px] justify-center bg-[#FF8469] font-bold w-[12px] h-[12px] top-[-3px] left-[9px]  rounded-full absolute '>{productCount === 0 ? initilaCount : productCount}</div>
                     </button>
 
                     {cartPopUp ?
-                    <div className='fixed w-full h-screen left-0 top-[95px] flex  justify-end  bg-[#000000b3]'></div>
+                    <div className='fixed w-full h-screen left-0 top-[98px] xl:top-[95px] flex  justify-end  bg-[#000000b3]'></div>
                     :
                     <></>
                     }
 
                     {veliPopUp ?
-                    <div className='fixed w-full h-screen left-0 top-[95px] flex  justify-end  bg-[#000000b3]'></div>
+                    <div className='fixed w-full h-screen left-0 top-[98px] xl:top-[95px] flex  justify-end  bg-[#000000b3]'></div>
                     :
                     <></>
                     }
@@ -152,7 +202,7 @@ const Navbar: React.FC = () => {
 
                 {veliPopUp ?
                     <>
-                        <MyVelicomp />
+                        <MyVelicomp onLogoutClick={() => setIsLogoutOpen(true)}/>
                     </>    
                     :
                     <></>
@@ -176,6 +226,10 @@ const Navbar: React.FC = () => {
 
                 
             </div>
+
+                {isLogoutOpen && (
+                 <LogOutComp onClose={() => setIsLogoutOpen(false)} />
+                )}
 
            
         </nav>

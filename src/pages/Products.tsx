@@ -35,7 +35,7 @@ const Products = () => {
 
     const changePageSize = (value: string) => {
         setPageSize(value)
-        // searchParams.set('page', '1')
+        
         searchParams.set('pageSize', value)
 
         setSearchParams(searchParams)

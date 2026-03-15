@@ -12,8 +12,8 @@ const Footer = () => {
     useEffect(() => {
     if (!path) return
 
-    const firstSegment = path.split("/")[1] // <-- IMPORTANT
-    console.log(firstSegment);
+    const firstSegment = path.split("/")[1] 
+    
     
 
     if (firstSegment === "category") {

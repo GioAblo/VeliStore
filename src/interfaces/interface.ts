@@ -6,7 +6,7 @@ export interface UserInterface {
   last_name: string;
   email: string;
   password: string;
-  phone_numebr: string;
+  phone_number: string;
   verfied: string;
   role: string;
   refresh_token: string;

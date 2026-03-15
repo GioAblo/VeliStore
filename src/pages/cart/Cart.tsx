@@ -11,6 +11,7 @@ import Contactinfo from './Contactinfo'
 import { setProductCount } from '@/store/countProduct'
 import { useWindowScroll } from '@uidotdev/usehooks'
 import PaymentCart from './PaymentCart'
+import { number } from 'yup'
 
 const Cart = () => {
 
@@ -32,6 +33,14 @@ const Cart = () => {
     const [discuntPrice, setDiscuntPrice] = useState(Number)
     const [totalPrice, setTotalPrice] = useState(Number)
 
+
+
+
+
+
+
+
+
     const dispatch = useDispatch()
 
 
@@ -44,7 +53,7 @@ const Cart = () => {
     useEffect(() => {
         const count = cartData.reduce((total, product) => total + product.count, 0);
         setCountProduct(count);
-    }, [cartData]);
+    }, [cartData, countProduct, deleteFromCart, addToCart, clearCart]);
         
 
     useEffect(() => {
@@ -100,7 +109,6 @@ const Cart = () => {
     
     
 
-    console.log(dataPrice);
     
 
   return (

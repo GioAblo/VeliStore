@@ -62,7 +62,7 @@ export const getProducts = async (
     const response = await axios.get(API_GET_PRODUCTS_FILTERS_URL, { params });
 
     if (response.status === 200) {
-      console.log(response.data);
+      
       
       return response.data;
     }
@@ -117,7 +117,7 @@ export const deleteProductById = async (
     return response.data;
   } catch (err) {
     if (err.response?.status === 404) {
-      console.log("Deleted successfully, even though 404 returned");
+      
       return 1; 
     }
     if (err.response?.status === 500) {
@@ -127,7 +127,7 @@ export const deleteProductById = async (
               icon:"warning",
         });
     }
-    console.log("ERROR", err.response?.data || err.message);
+    
     throw err;
   }
 };

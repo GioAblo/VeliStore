@@ -63,7 +63,7 @@ const Payment = ({amount, totalItem}) => {
     validationSchema: paySchema,
     onSubmit: async (values) => {
       Pay()
-      console.log("Processing payment...", values);
+      
     },
   });
 
