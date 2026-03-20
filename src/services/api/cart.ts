@@ -1,5 +1,5 @@
 import axios from "axios"
-import { API_GET_CART_URL } from "./allUrl"
+import { API_GET_CART_URL, API_GET_CLEAR_CART_URL } from "./allUrl"
 import ProductInterface from "./product"
 import { log } from "console"
 
@@ -80,7 +80,7 @@ export const clearCartProducts = async( token: string) => {
   
 
     try {
-      const response = await axios.post("http://localhost:3000/cart/clear", 
+      const response = await axios.post(API_GET_CLEAR_CART_URL, 
         {},
         {
           headers: {

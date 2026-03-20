@@ -1,6 +1,6 @@
 // Auth
 export const API_SIGNIN_URL = "https://backend-veli-store-6.onrender.com/auth/login"
-export const API_SIGNUP_URL = "http://localhost:3000/auth/register"
+export const API_SIGNUP_URL = "https://backend-veli-store-6.onrender.com/auth/register"
 
 // User
 export const API_GET_CURRENT_USER_URL = "https://backend-veli-store-6.onrender.com/user/current-user"
@@ -15,6 +15,7 @@ export const API_GET_CATEGORY_URL = "https://backend-veli-store-6.onrender.com/p
 
 // cart
 export const API_GET_CART_URL = "https://backend-veli-store-6.onrender.com/cart"
+export const API_GET_CLEAR_CART_URL = "https://backend-veli-store-6.onrender.com/cart/clear"
 
 //wishlist 
 export const API_WISHLIST_URL = "https://backend-veli-store-6.onrender.com/liked-products"
